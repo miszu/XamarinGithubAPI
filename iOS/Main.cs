@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace AngryTests.iOS
+namespace AngryNerds.iOS
 {
 	public class Application
 	{

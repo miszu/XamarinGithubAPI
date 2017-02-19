@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace AngryTests
+namespace AngryNerds
 {
 	public partial class App : Application
 	{
@@ -8,7 +8,7 @@ namespace AngryTests
 		{
 			InitializeComponent();
 
-			MainPage = new AngryTestsPage();
+			MainPage = new AngryNerdsPage();
 		}
 
 		protected override void OnStart()
