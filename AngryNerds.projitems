@@ -10,23 +10,39 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AngryNerdsPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\RepositoryDetailsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\RepositoriesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)AngryNerdsPage.xaml.cs">
-      <DependentUpon>AngryNerdsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)GitHub\GitHubDataProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Repository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\RepositoryOwner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Guard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\UserDialogService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\RepositoryDetailsView.xaml.cs">
+      <DependentUpon>RepositoryDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RepositoryDetailsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RepositoriesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\NavigationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\IoCContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\RepositoriesView.xaml.cs">
+      <DependentUpon>RepositoriesView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)GitHub\" />
     <Folder Include="$(MSBuildThisFileDirectory)Model\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
+    <Folder Include="$(MSBuildThisFileDirectory)View\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModel\" />
   </ItemGroup>
 </Project>

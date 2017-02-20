@@ -2,6 +2,7 @@
 using System.Net.Http;
 using AngryNerds.GitHub;
 using NUnit.Framework;
+using AngryNerds.Utilities;
 
 namespace AngryNerds.Tests.GitHub
 {
@@ -12,7 +13,7 @@ namespace AngryNerds.Tests.GitHub
 		[SetUp]
 		public void SetUp()
 		{
-			this.gitHubDataProvider = new GitHubDataProvider();
+			this.gitHubDataProvider = new GitHubDataProvider(new UserDialogService());
 		}
 
 		[Test]

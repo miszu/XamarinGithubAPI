@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AngryNerds.View.RepositoriesView" Title="xamarin.git">
+	<ContentPage.Content>
+		  <ListView ItemsSource="{Binding Repositories}" IsRefreshing="{Binding IsBusy}" HasUnevenRows="true" SelectedItem="{Binding SelectedRepository}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshRepositoriesCommand}">
+		    <ListView.ItemTemplate>
+		      <DataTemplate>
+		        <ImageCell Text="{Binding Name}" Detail="{Binding Description}" ImageSource="{Binding Owner.AvatarUrl}"/>
+		      </DataTemplate>
+		    </ListView.ItemTemplate>
+		  </ListView>
+	</ContentPage.Content>
+</ContentPage>

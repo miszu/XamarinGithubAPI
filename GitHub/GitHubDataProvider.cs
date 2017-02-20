@@ -16,31 +16,34 @@ namespace AngryNerds.GitHub
 	{
 		private const string GitHubRepositoriesUrlTemplate = "https://api.github.com/users/{0}/repos"; 
 		private HttpClient httpClient;
+		private IUserDialogService userDialogService;
 
-		public GitHubDataProvider()
+		public GitHubDataProvider(IUserDialogService userDialogService)
 		{
+			this.userDialogService = userDialogService;
 			this.httpClient = new HttpClient();
 
-    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "json");
+   		    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "json");
 			httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
-			httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
-
 		}
 
 		public async Task<IEnumerable<Repository>> GetUserRepositories(string userName)
 		{
 			Guard.ThrowForNullOrEmptyString(userName, nameof(userName));
 
-			var repositoriesHttpResponse = await this.httpClient.GetAsync(string.Format(GitHubRepositoriesUrlTemplate, userName));
-
-			if (repositoriesHttpResponse.IsSuccessStatusCode == false)
+			using (this.userDialogService.ShowLoading("Rozmawiam z serwerem..."))
 			{
-				throw new HttpRequestException($"Repositories API endpoint reported {repositoriesHttpResponse.StatusCode} http error");
+				var repositoriesHttpResponse = await this.httpClient.GetAsync(string.Format(GitHubRepositoriesUrlTemplate, userName));
+
+				if (repositoriesHttpResponse.IsSuccessStatusCode == false)
+				{
+					throw new HttpRequestException($"Repositories API endpoint reported {repositoriesHttpResponse.StatusCode} http error");
+				}
+
+				var response = await repositoriesHttpResponse.Content.ReadAsStringAsync();
+
+				return JsonConvert.DeserializeObject<IEnumerable<Repository>>(response);
 			}
-
-			var response = await repositoriesHttpResponse.Content.ReadAsStringAsync();
-
-			return JsonConvert.DeserializeObject<IEnumerable<Repository>>(response);
 		}
 	}
 }

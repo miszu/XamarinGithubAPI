@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using AngryNerds.Utilities;
+using Xamarin.Forms;
+using MvvmCross.Platform;
+using AngryNerds.View;
 
 namespace AngryNerds
 {
@@ -7,8 +10,13 @@ namespace AngryNerds
 		public App()
 		{
 			InitializeComponent();
+			IoCContainer.Register();
 
-			MainPage = new AngryNerdsPage();
+			MainPage = new NavigationPage(Mvx.IocConstruct<RepositoriesView>())
+			{
+				BarTextColor = Color.White,
+				BarBackgroundColor = Color.Teal
+			};
 		}
 
 		protected override void OnStart()
